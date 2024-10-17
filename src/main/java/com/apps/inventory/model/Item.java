@@ -48,29 +48,10 @@ public class Item {
     @Column(name = "updated_by", length = 150)
     private String updated_by;
 
-    @Column(name = "additional_info")
+    @Column(name = "additional_info", columnDefinition = "jsonb")
     private String additional_info;
 
-//    @Column(columnDefinition = "jsonb")
+//    @Column(name = "additional_info")
 //    private String additional_info;
-
-//    public Map<String, Object> getAdditionalInfoAsMap() {
-//        try {
-//            ObjectMapper objectMapper = new ObjectMapper();
-//            return objectMapper.readValue(this.additional_info, Map.class);
-//        } catch (Exception e) {
-//            e.printStackTrace();
-//            return null;
-//        }
-//    }
-
-//    public void setAdditional_info(Map<String, Object> additionalInfo) {
-//        try {
-//            ObjectMapper objectMapper = new ObjectMapper();
-//            this.additional_info = objectMapper.writeValueAsString(additionalInfo);
-//        } catch (Exception e) {
-//            e.printStackTrace();
-//        }
-//    }
 
 }

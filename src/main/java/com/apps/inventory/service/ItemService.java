@@ -96,17 +96,6 @@ public class ItemService {
                 }
             }
 
-
-//            // Initialize ObjectMapper
-//            ObjectMapper objectMapper = new ObjectMapper();
-//
-//            // Assuming request.getAdditional_info() returns a JSON string
-//            String additionalInfoJson = request.getAdditional_info();  // Ensure this returns a valid JSON string
-//            Map<String, Object> additionalInfoMap = objectMapper.readValue(additionalInfoJson, Map.class);
-//
-//            // Convert the Map back to JSON String if needed
-//            additionalInfoJson = objectMapper.writeValueAsString(additionalInfoMap);
-//            item.setAdditional_info(additionalInfoJson);
             item.setAdditional_info(request.getAdditional_info());
             item.setCreated_by("User");
             item.setCreated_at(LocalDateTime.now());
@@ -115,10 +104,10 @@ public class ItemService {
             return ResponseEntity.ok(item);
         } catch (Exception e) {
             log.info("cek error " + e.getMessage());
-            return ResponseEntity.badRequest().body(null); // Handle conversion error
+            return ResponseEntity.badRequest().body(null);
         }
-
     }
+
 
     public ResponseEntity<Item> updateItem(Integer id, ItemRequestDto request) {
         try {
@@ -134,10 +123,6 @@ public class ItemService {
             existingItem.setNama_barang(request.getNama_barang());
             existingItem.setJumlah_stok_barang(request.getJumlah_stok_barang());
             existingItem.setNomor_seri_barang(request.getNomor_seri_barang());
-
-//            ObjectMapper objectMapper = new ObjectMapper();
-//            Map<String, Object> additionalInfoMap = objectMapper.readValue(request.getAdditional_info(), Map.class);
-//            existingItem.setAdditional_info(additionalInfoMap);
 
             if (request.getGambar_barang() != null && !request.getGambar_barang().isEmpty()) {
                 String contentType = request.getGambar_barang().getContentType();
@@ -165,7 +150,7 @@ public class ItemService {
 
             return ResponseEntity.ok(existingItem);
         } catch (Exception e) {
-            return ResponseEntity.badRequest().body(null); // Handle conversion error
+            return ResponseEntity.badRequest().body(null);
         }
 
     }
