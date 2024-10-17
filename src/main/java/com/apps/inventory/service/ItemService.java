@@ -68,6 +68,7 @@ public class ItemService {
     }
 
     public Item getById(Integer id) {
+        logger.info("response: {}", id);
         return itemRepository.findById(id).orElse(null);
     }
 
@@ -108,7 +109,6 @@ public class ItemService {
         }
     }
 
-
     public ResponseEntity<Item> updateItem(Integer id, ItemRequestDto request) {
         try {
             logger.info("Received ItemRequestDto: {}", request);
@@ -143,6 +143,7 @@ public class ItemService {
                 }
             }
 
+            existingItem.setAdditional_info(request.getAdditional_info());
             existingItem.setUpdated_by("User");
             existingItem.setUpdated_at(LocalDateTime.now());
 
@@ -152,11 +153,11 @@ public class ItemService {
         } catch (Exception e) {
             return ResponseEntity.badRequest().body(null);
         }
-
     }
 
     public ResponseEntity<?> deleteItem(Integer id) {
         Optional<Item> getItem = itemRepository.findById(id);
+        logger.info("cek", getItem.isPresent());
         if (!getItem.isPresent()) {
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Data tidak ada");
         }
